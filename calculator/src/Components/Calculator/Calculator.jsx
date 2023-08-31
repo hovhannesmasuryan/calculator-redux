@@ -1,60 +1,68 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { equalClicked, clearClicked, operatorClicked, digitClicked,} from '../../store/slices/calculatorSlice';
+import React, { useState } from 'react';
 import './Calculator.css';
  
 
 function Calculator() {
-  const dispatch = useDispatch();
-  const displayValue = useSelector((state) => state.calculator.displayValue);
+const [display, setDisplay] = useState("")
 
-  const handleDigitClick = (digit) => {
-    dispatch(digitClicked(digit));
+  const handleClick = (e) => {
+    setDisplay(display.concat(e.target.name));
   };
 
-  const handleOperatorClick = (operator) => {
-    dispatch(operatorClicked(operator));
-  };
-
+ 
   const handleClearClick = () => {
-    dispatch(clearClicked());
+    setDisplay("")
   };
+
+  const backspace = () => {
+    setDisplay(display.slice(0, -1));
+  }
 
   const handleEqualClick = () => {
-    dispatch(equalClicked());
+    try {
+      setDisplay(eval(display).toString())
+    } catch(err) {
+      setDisplay("Error")
+    }
   };
 
   return (
+    <div className='container'>
     <div className="calculator">
       <div>
-        <input type="text" className="display" value={displayValue} readOnly />
+        <input type="text" className="display" value={display} readOnly />
       </div>
       <div className="buttons">
         
-          <button onClick={() => handleDigitClick('9')}>9</button>
-          <button onClick={() => handleDigitClick('8')}>8</button>
-          <button onClick={() => handleDigitClick('7')}>7</button>
-          <button className='operator' onClick={() => handleOperatorClick('+')}>+</button>
+          <button className='Clear' onClick={ handleClearClick }>Clear</button>
+          <button onClick={ backspace }>DEL</button>
+          <button name='+' className='operator' onClick={handleClick}>+</button>
+          
+          <button name='9' onClick={ handleClick }>9</button>
+          <button name='8' onClick={ handleClick }>8</button>
+          <button name='7' onClick={ handleClick }>7</button>
+          <button name='-' className='operator' onClick={ handleClick }>-</button>
         
         
-          <button onClick={() => handleDigitClick('6')}>6</button>
-          <button onClick={() => handleDigitClick('5')}>5</button>
-          <button onClick={() => handleDigitClick('4')}>4</button>
-          <button className='operator' onClick={() => handleOperatorClick('-')}>-</button>
+          <button name='6' onClick={ handleClick }>6</button>
+          <button name='5' onClick={ handleClick }>5</button>
+          <button name='4' onClick={ handleClick }>4</button>
+          <button name='*' className='operator' onClick={ handleClick }>*</button>
         
        
-          <button onClick={() => handleDigitClick('3')}>1</button>
-          <button onClick={() => handleDigitClick('2')}>2</button>
-          <button onClick={() => handleDigitClick('1')}>3</button>
-          <button className='operator' onClick={() => handleOperatorClick('*')}>*</button>
+          <button name='1' onClick={ handleClick }>1</button>
+          <button name='2' onClick={ handleClick }>2</button>
+          <button name='3' onClick={ handleClick }>3</button>
+          <button name='/' className='operator' onClick={ handleClick }>/</button>
         
         
-          <button onClick={() => handleDigitClick('0')}>0</button>
-          <button onClick={() => handleClearClick()}>C</button>
-          <button onClick={() => handleEqualClick()}>=</button>
-          <button className='operator' onClick={() => handleOperatorClick('/')}>/</button>
+          <button name='0' onClick={ handleClick }> 0 </button>
+          <button name='.' onClick={ handleClick }> . </button>
+          <button className='Equel' name='=' onClick={ handleEqualClick }>=</button>
+
         
       </div>
+    </div>
     </div>
   );
 }
