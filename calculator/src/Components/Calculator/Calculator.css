@@ -1,16 +1,15 @@
 .container {
-  border: 2px solid black;
-  width: 350px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: black;
-  -webkit-box-shadow: 10px 10px 88px 0px rgba(0,0,0,1);
+    border: 2px solid black;
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: black;
+    -webkit-box-shadow: 10px 10px 88px 0px rgba(0,0,0,1);
     -moz-box-shadow: 10px 10px 88px 0px rgba(0,0,0,1);
     box-shadow: 10px 10px 88px 0px rgba(0,0,0,1);
 }
 .calculator {
-    width: 300px;
-    
+    width: 300px;    
     margin: 0 auto;
     border: 1px solid #ccc;
     border-radius: 10px;
